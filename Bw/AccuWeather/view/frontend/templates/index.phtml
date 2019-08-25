@@ -1,0 +1,58 @@
+<?php
+$response = $this->getResponse();
+/* @var $response \Bw\AccuWeather\Logic\AccuWeather\Response\CurrentWeather */
+?>
+
+<div class="aw-row">
+    <div class="center">
+        <h4>Lublin</h4>
+        <p><?php echo date('Y-m-d H:i:s', $response->getEpochTime()); ?></p>
+    </div>
+    <div class="container">
+        <div class="aw-col aw-col-1">
+            <img 
+                src="<?php echo $block->getViewFileUrl(sprintf('Bw_AccuWeather::images/%s.png', $response->getWeatherIcon())); ?>" 
+                alt="<?php echo $response->getWeatherText() ?>" 
+            />
+        </div>
+        <div class="aw-col aw-col-2">
+            <?php echo $response->getTemperature()->getMetric()->getValue(); ?>
+            <?php echo $response->getTemperature()->getMetric()->getUnit(); ?>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="center">
+        <?php echo $response->getWeatherText(); ?>
+    </div>
+</div>
+
+<style type="text/css">
+    .aw-row {
+        margin: 20px auto;
+        width: 200px;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid silver;
+        padding: 20px;
+    }
+    
+    .aw-col {
+        width: 50%;
+        float: left;
+    }
+    
+    .aw-col-1 {
+        text-align: right;
+    }
+    
+    .aw-col-2 {
+        font-size: 24px;
+        text-align: left;
+        line-height: 45px;
+        font-weight: bold;
+    }
+    
+    .clear {
+        clear: both;
+    }
+</style>
